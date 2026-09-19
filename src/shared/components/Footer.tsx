@@ -1,54 +1,55 @@
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
-import { useLanguage } from '@/lib/i18n';
+import { Link } from 'react-router-dom';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { useTranslation } from '@/shared/hooks/useTranslation';
 
-export function Footer() {
-  const { t } = useLanguage();
+export const Footer = () => {
+  const { t } = useTranslation();
 
   const socials = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: Github, href: 'https://github.com/1gabrielcarrizo', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/1gabrielcarrizo/', label: 'LinkedIn' },
+  ];
+
+  const quickLinks = [
+    { label: t('nav.projects'), to: '/projects' },
+    { label: t('nav.about'), to: '/#about' },
+    { label: t('nav.contact'), to: '/#contact' },
   ];
 
   return (
     <footer id="contact" className="scroll-mt-20 border-t border-border/40">
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
-          <div>
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 md:place-items-center md:text-center">
+          <div className="flex flex-col items-center text-center sm:items-start sm:text-left md:items-center md:text-center">
             <h3 className="text-lg font-semibold">Gabriel.dev</h3>
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
               {t('footer.tagline')}
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center sm:items-start sm:text-left md:items-center md:text-center">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               {t('footer.quickLinks')}
             </h4>
             <ul className="mt-4 space-y-2 text-sm">
-              <li>
-                <a href="#projects" className="text-muted-foreground transition-colors hover:text-foreground">
-                  {t('nav.projects')}
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="text-muted-foreground transition-colors hover:text-foreground">
-                  {t('nav.about')}
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-muted-foreground transition-colors hover:text-foreground">
-                  {t('nav.contact')}
-                </a>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center sm:items-start sm:text-left md:items-center md:text-center">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               {t('footer.social')}
             </h4>
-            <div className="mt-4 flex gap-3">
+            <div className="mt-4 flex justify-center gap-3">
               {socials.map((social) => (
                 <a
                   key={social.label}
@@ -63,11 +64,11 @@ export function Footer() {
               ))}
             </div>
             <a
-              href="mailto:hello@Gabriel.dev"
+              href="mailto:gabrielcarrizo2139@gmail.com"
               className="mt-4 flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <Mail className="h-4 w-4" />
-              hello@Gabriel.dev
+              gabrielcarrizo2139@gmail.com
             </a>
           </div>
         </div>
@@ -80,4 +81,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+};

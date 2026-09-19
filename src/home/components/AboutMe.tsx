@@ -1,12 +1,15 @@
-import { ArrowRight, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Download, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLanguage } from '@/lib/i18n';
+import { useTranslation } from '@/shared/hooks/useTranslation';
 
-export function Hero() {
-  const { t } = useLanguage();
+const CV_URL = '/Carrizo-Ramon-Angel-Gabriel-CV.pdf';
+
+export const AboutMe = () => {
+  const { t } = useTranslation();
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="about" className="relative scroll-mt-20 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
       </div>
@@ -25,22 +28,28 @@ export function Hero() {
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             {t('hero.description')}
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild size="lg" className="gap-2">
-              <a href="#projects">
+              <Link to="/projects">
                 {t('hero.cta')}
                 <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="gap-2">
+              <a href={CV_URL} target="_blank" rel="noopener noreferrer">
+                <Download className="h-4 w-4" />
+                {t('hero.downloadCv')}
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">
-              <a href="#contact">
+              <Link to="/#contact">
                 <Mail className="h-4 w-4" />
                 {t('hero.ctaSecondary')}
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
