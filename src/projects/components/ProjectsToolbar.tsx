@@ -8,22 +8,18 @@ interface ProjectsToolbarProps {
   search: string;
   onSearchChange: (value: string) => void;
   availableTags: string[];
-  selectedTag: string | null;
-  onTagSelect: (tag: string | null) => void;
+  selectedTags: string[]; // <-- Ahora recibe el array
+  onTagToggle: (tag: string | null) => void; // <-- Nueva función
 }
 
 export const ProjectsToolbar = ({
   search,
   onSearchChange,
   availableTags,
-  selectedTag,
-  onTagSelect,
+  selectedTags,
+  onTagToggle,
 }: ProjectsToolbarProps) => {
   const { t } = useTranslation();
-
-  const handleTagClick = (tag: string | null): void => {
-    onTagSelect(selectedTag === tag ? null : tag);
-  };
 
   return (
     <div className="mb-10 space-y-6">
@@ -38,29 +34,36 @@ export const ProjectsToolbar = ({
       </div>
 
       <div className="flex flex-wrap gap-2">
+        {/* Botón de "Todas" */}
         <Badge
-          variant={selectedTag === null ? 'default' : 'outline'}
+          variant={selectedTags.length === 0 ? 'default' : 'outline'}
           className={cn(
             'cursor-pointer px-3 py-1 text-sm transition-colors',
-            selectedTag !== null && 'hover:bg-secondary'
+            selectedTags.length > 0 && 'hover:bg-secondary'
           )}
-          onClick={() => handleTagClick(null)}
+          onClick={() => onTagToggle(null)}
         >
           {t('projects.allTags')}
         </Badge>
-        {availableTags.map((tag) => (
-          <Badge
-            key={tag}
-            variant={selectedTag === tag ? 'default' : 'outline'}
-            className={cn(
-              'cursor-pointer px-3 py-1 text-sm transition-colors',
-              selectedTag !== tag && 'hover:bg-secondary'
-            )}
-            onClick={() => handleTagClick(tag)}
-          >
-            {tag}
-          </Badge>
-        ))}
+
+        {/* Lista dinámica de Tags */}
+        {availableTags.map((tag) => {
+          const isSelected = selectedTags.includes(tag);
+
+          return (
+            <Badge
+              key={tag}
+              variant={isSelected ? 'default' : 'outline'}
+              className={cn(
+                'cursor-pointer px-3 py-1 text-sm transition-colors',
+                !isSelected && 'hover:bg-secondary'
+              )}
+              onClick={() => onTagToggle(tag)}
+            >
+              {tag}
+            </Badge>
+          );
+        })}
       </div>
     </div>
   );

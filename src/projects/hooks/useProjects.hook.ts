@@ -7,8 +7,8 @@ const PROJECTS_PER_PAGE = 6;
 interface UseProjectsReturn {
   search: string;
   setSearch: (value: string) => void;
-  selectedTag: string | null;
-  setSelectedTag: (tag: string | null) => void;
+  selectedTags: string[]; // <-- AHORA ES UN ARRAY DE STRINGS
+  toggleTag: (tag: string | null) => void; // <-- NUEVA FUNCIÓN PARA MANEJAR EL CLIC
   currentPage: number;
   setCurrentPage: (page: number) => void;
   availableTags: string[];
@@ -21,7 +21,8 @@ interface UseProjectsReturn {
 
 export const useProjects = (): UseProjectsReturn => {
   const [search, setSearch] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  // Iniciamos con un array vacío (que representa que "Todas" está seleccionado)
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const availableTags = useMemo(() => {
@@ -32,6 +33,33 @@ export const useProjects = (): UseProjectsReturn => {
     return Array.from(tagSet).sort();
   }, []);
 
+  // ESTA ES LA MAGIA DEL NUEVO FILTRADO
+  const toggleTag = (tag: string | null) => {
+    // Si hace clic explícitamente en el botón "Todas"
+    if (tag === null) {
+      setSelectedTags([]);
+      return;
+    }
+
+    setSelectedTags((prevTags) => {
+      // Si el tag ya estaba seleccionado, lo removemos
+      if (prevTags.includes(tag)) {
+        return prevTags.filter((t) => t !== tag);
+      }
+
+      // Si no estaba seleccionado, lo agregamos a los que ya estaban
+      const newTags = [...prevTags, tag];
+
+      // TU REGLA: Si al seleccionar este tag se alcanzan TODOS los tags disponibles,
+      // se resetea automáticamente al estado inicial ("Todas").
+      if (newTags.length === availableTags.length) {
+        return [];
+      }
+
+      return newTags;
+    });
+  };
+
   const filteredProjects = useMemo(() => {
     const query = search.toLowerCase().trim();
 
@@ -41,12 +69,16 @@ export const useProjects = (): UseProjectsReturn => {
         project.title.toLowerCase().includes(query) ||
         project.description.toLowerCase().includes(query);
 
+      // Si el array está vacío, pasan todos.
+      // .every() asegura que el proyecto tenga TODOS los tags seleccionados (Ej: React Y TypeScript).
+      // (Nota: Si prefieres que muestre proyectos que tengan React O TypeScript, cambia ".every" por ".some")
       const matchesTag =
-        !selectedTag || project.tags.some((tag) => tag === selectedTag);
+        selectedTags.length === 0 ||
+        selectedTags.every((tag) => project.tags.includes(tag));
 
       return matchesSearch && matchesTag;
     });
-  }, [search, selectedTag]);
+  }, [search, selectedTags]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE));
 
@@ -56,9 +88,10 @@ export const useProjects = (): UseProjectsReturn => {
     }
   }, [currentPage, totalPages]);
 
+  // Reiniciamos a la página 1 cuando el usuario escribe en el buscador o toca los filtros
   useEffect(() => {
     setCurrentPage(1);
-  }, [search, selectedTag]);
+  }, [search, selectedTags]);
 
   const paginatedProjects = useMemo(() => {
     const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
@@ -68,8 +101,8 @@ export const useProjects = (): UseProjectsReturn => {
   return {
     search,
     setSearch,
-    selectedTag,
-    setSelectedTag,
+    selectedTags,
+    toggleTag,
     currentPage,
     setCurrentPage,
     availableTags,

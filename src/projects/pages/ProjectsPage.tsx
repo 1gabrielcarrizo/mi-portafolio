@@ -9,8 +9,8 @@ export const ProjectsPage = () => {
   const {
     search,
     setSearch,
-    selectedTag,
-    setSelectedTag,
+    selectedTags, // <-- Cambiado: ahora recibimos el array
+    toggleTag,    // <-- Cambiado: recibimos la función
     currentPage,
     setCurrentPage,
     availableTags,
@@ -35,8 +35,8 @@ export const ProjectsPage = () => {
           search={search}
           onSearchChange={setSearch}
           availableTags={availableTags}
-          selectedTag={selectedTag}
-          onTagSelect={setSelectedTag}
+          selectedTags={selectedTags} // <-- Se lo pasamos al Toolbar
+          onTagToggle={toggleTag}     // <-- Se lo pasamos al Toolbar
         />
 
         {totalFiltered === 0 ? (
