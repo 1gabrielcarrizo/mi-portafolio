@@ -43,7 +43,7 @@ export const translations: Record<'es' | 'en', Record<TranslationKey, string>> =
     'projects.featuredTitle': 'Proyectos destacados',
     'projects.subtitle':
       'Una selección de mis trabajos que combinan bases sólidas de ingeniería con un diseño limpio y funcional.',
-    'projects.searchPlaceholder': 'Buscar proyectos o tecnologías...',
+    'projects.searchPlaceholder': 'Buscar proyectos por título o descripción...',
     'projects.noResults': 'No se encontraron proyectos que coincidan con tu búsqueda.',
     'projects.viewCode': 'Código',
     'projects.viewDemo': 'Demo',
@@ -73,7 +73,7 @@ export const translations: Record<'es' | 'en', Record<TranslationKey, string>> =
     'projects.featuredTitle': 'Featured projects',
     'projects.subtitle':
       'A selection of my work combining solid engineering foundations with clean and functional design.',
-    'projects.searchPlaceholder': 'Search projects or technologies...',
+    'projects.searchPlaceholder': 'Search projects by name or description...',
     'projects.noResults': 'No projects found matching your search.',
     'projects.viewCode': 'Code',
     'projects.viewDemo': 'Demo',
