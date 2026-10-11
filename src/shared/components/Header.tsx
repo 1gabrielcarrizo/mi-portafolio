@@ -18,7 +18,6 @@ export const Header = () => {
   const navItems = [
     { label: t('nav.projects'), to: '/projects' },
     { label: t('nav.about'), to: '/#about' },
-    { label: t('nav.contact'), to: '/#contact' },
   ];
 
   return (

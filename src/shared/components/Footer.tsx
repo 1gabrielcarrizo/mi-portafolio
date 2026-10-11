@@ -8,12 +8,12 @@ export const Footer = () => {
   const socials = [
     { icon: Github, href: 'https://github.com/1gabrielcarrizo', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/1gabrielcarrizo/', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:gabrielcarrizo2139@gmail.com', label: 'Mail' },
   ];
 
   const quickLinks = [
     { label: t('nav.projects'), to: '/projects' },
     { label: t('nav.about'), to: '/#about' },
-    { label: t('nav.contact'), to: '/#contact' },
   ];
 
   return (
@@ -63,13 +63,6 @@ export const Footer = () => {
                 </a>
               ))}
             </div>
-            <a
-              href="mailto:gabrielcarrizo2139@gmail.com"
-              className="mt-4 flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Mail className="h-4 w-4" />
-              gabrielcarrizo2139@gmail.com
-            </a>
           </div>
         </div>
 

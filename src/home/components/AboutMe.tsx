@@ -3,7 +3,7 @@ import { ArrowRight, Download, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/shared/hooks/useTranslation';
 
-const CV_URL = '/Carrizo-Ramon-Angel-Gabriel-CV.pdf';
+const CV_URL = '/CV_Ramon_Angel_Gabriel_Carrizo.pdf';
 
 export const AboutMe = () => {
   const { t } = useTranslation();
@@ -42,10 +42,12 @@ export const AboutMe = () => {
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2">
-              <Link to="/#contact">
+              <a
+                href="mailto:gabrielcarrizo2139@gmail.com"
+              >
                 <Mail className="h-4 w-4" />
                 {t('hero.ctaSecondary')}
-              </Link>
+              </a>
             </Button>
           </div>
         </div>

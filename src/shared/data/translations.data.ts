@@ -1,7 +1,6 @@
 export type TranslationKey =
   | 'nav.projects'
   | 'nav.about'
-  | 'nav.contact'
   | 'hero.greeting'
   | 'hero.name'
   | 'hero.title'
@@ -30,7 +29,6 @@ export const translations: Record<'es' | 'en', Record<TranslationKey, string>> =
   es: {
     'nav.projects': 'Proyectos',
     'nav.about': 'Sobre mí',
-    'nav.contact': 'Contacto',
     'hero.greeting': 'Hola, soy',
     'hero.name': 'Ramón Angel Gabriel Carrizo',
     'hero.title': 'Desarrollador Full Stack',
@@ -60,7 +58,6 @@ export const translations: Record<'es' | 'en', Record<TranslationKey, string>> =
   en: {
     'nav.projects': 'Projects',
     'nav.about': 'About',
-    'nav.contact': 'Contact',
     'hero.greeting': "Hi, I'm",
     'hero.name': 'Ramón Angel Gabriel Carrizo',
     'hero.title': 'Full Stack Developer',
