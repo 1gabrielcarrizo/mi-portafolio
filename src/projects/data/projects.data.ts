@@ -47,7 +47,7 @@ export const projects: Project[] = [
     tags: ['React', 'TypeScript', 'TanStack Query', 'NestJS', 'shadcn/ui', 'Tailwind CSS'],
     repoUrl: 'https://github.com/1gabrielcarrizo/heroes-app-frontend',
     demoUrl: 'https://heroes-app-1gabrielcarrizo.netlify.app/',
-    featured: true,
+    featured: false,
   },
   {
     id: 4,
@@ -128,6 +128,22 @@ export const projects: Project[] = [
     repoUrl: 'https://github.com/1gabrielcarrizo/journal-app',
     demoUrl: 'https://journal-app-1gabrielcarrizo.netlify.app/auth/login',
     featured: false,
+  },
+  {
+    id: 9,
+    title: {
+      es: 'Luxe Estate',
+      en: 'Luxe Estate'
+    },
+    description: {
+      es: 'Plataforma Full Stack de bienes raíces creada mediante desarrollo asistido por IA (Google Antigravity y MCP). Incorpora autenticación, autorización con políticas de base de datos en Supabase, carga de archivos, mapas interactivos con Leaflet y optimización SEO.',
+      en: 'Full Stack real estate platform built through AI-assisted development (Google Antigravity and MCP). Features authentication, authorization with Supabase database policies, file uploads, interactive maps with Leaflet, and SEO optimization.'
+    },
+    image: '/vibecoding-luxu-estate-psi-vercel-app.webp',
+    tags: ['Next.js', 'React', 'TypeScript', 'Supabase', 'Tailwind CSS', 'Leaflet'],
+    repoUrl: 'https://github.com/1gabrielcarrizo/vibecoding-luxu-estate',
+    demoUrl: 'https://vibecoding-luxu-estate-psi.vercel.app/',
+    featured: true,
   },
 ];
 
